@@ -1,0 +1,16 @@
+test_name: Contrato da listagem de produtos
+
+stages:
+  - name: GET /api/produtos retorna a colecao esperada
+    request:
+      url: http://127.0.0.1:8000/api/produtos
+      method: GET
+    response:
+      status_code: 200
+      json:
+        - nome: mouse
+          preco: 100.0
+          estoque: !anyint
+        - nome: teclado
+          preco: 200.0
+          estoque: !anyint

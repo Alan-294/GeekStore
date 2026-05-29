@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>GeekStore E-commerce</title>
+</head>
+<body>
+    <h1>Bem-vindo à GeekStore</h1>
+    <div id="mensagem" style="color: green; font-weight: bold; margin-bottom: 15px;"></div>
+
+    <label for="input-produto">Nome do Produto:</label>
+    <input type="text" id="input-produto" placeholder="Ex: teclado"><br><br>
+
+    <label for="input-cartao">Número do Cartão:</label>
+    <input type="text" id="input-cartao" placeholder="0000 0000 0000 0000"><br><br>
+
+    <label for="input-cupom">Cupom de Desconto:</label>
+    <input type="text" id="input-cupom" placeholder="Ex: GEEK20"><br><br>
+
+    <button id="btn-comprar" onclick="fazerCompra()">Comprar</button>
+
+    <script>
+        async function fazerCompra() {
+            const produto = document.getElementById('input-produto').value;
+            const cartao = document.getElementById('input-cartao').value;
+            const cupom = document.getElementById('input-cupom').value;
+            const msgDiv = document.getElementById('mensagem');
+
+            msgDiv.innerText = "Processando...";
+            msgDiv.style.color = "blue";
+
+            setTimeout(async () => {
+                try {
+                    const response = await fetch('/api/comprar', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({produto: produto, cartao: cartao, cupom: cupom})
+                    });
+
+                    if(response.ok) {
+                        const data = await response.json();
+                        msgDiv.innerText = `Compra aprovada com sucesso! Valor pago: R$ ${data.valor_pago.toFixed(2)}`;
+                        msgDiv.style.color = "green";
+                    } else {
+                        const errorData = await response.json();
+                        msgDiv.innerText = "Erro: " + errorData.detail;
+                        msgDiv.style.color = "red";
+                    }
+                } catch (error) {
+                    msgDiv.innerText = "Erro na conexão com o servidor.";
+                    msgDiv.style.color = "red";
+                }
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

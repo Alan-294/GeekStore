@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+httpx
+pytest
+pytest-cov
+pytest-bdd
+pytest-mock
+tavern
+selenium
