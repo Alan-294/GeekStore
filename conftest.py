@@ -18,7 +18,7 @@ PRODUCTS = [
     ("camiseta", 50.0, 0),
 ]
 
-BASE_URL = os.getenv("BASE_URL", "http://127.0.0.1:8000")
+BASE_URL = os.getenv("BASE_URL", "http://127.0.0.1:8001")
 SERVER_PROCESS = None
 SERVER_DB_PATH = Path(__file__).with_name("geekstore_pytest_server.db")
 
@@ -48,7 +48,7 @@ def pytest_sessionstart(session):
             "--host",
             "127.0.0.1",
             "--port",
-            "8000",
+            "8001",
         ],
         cwd=Path(__file__).parent,
         env=env,
@@ -64,7 +64,7 @@ def pytest_sessionstart(session):
             return
         time.sleep(0.5)
 
-    pytest.exit("Nao foi possivel iniciar o servidor FastAPI em http://127.0.0.1:8000.", returncode=1)
+    pytest.exit("Nao foi possivel iniciar o servidor FastAPI em http://127.0.0.1:8001.", returncode=1)
 
 
 def pytest_sessionfinish(session, exitstatus):

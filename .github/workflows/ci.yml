@@ -6,7 +6,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      BASE_URL: http://127.0.0.1:8000
+      BASE_URL: http://127.0.0.1:8001
       DB_PATH: geekstore_ci.db
 
     steps:
@@ -28,7 +28,7 @@ jobs:
 
       - name: Iniciar aplicacao e rodar testes
         run: |
-          python -m uvicorn main:app --host 127.0.0.1 --port 8000 &
+          python -m uvicorn main:app --host 127.0.0.1 --port 8001 &
           APP_PID=$!
           trap "kill $APP_PID" EXIT
 

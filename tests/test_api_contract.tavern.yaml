@@ -3,7 +3,7 @@ test_name: Contrato da listagem de produtos
 stages:
   - name: GET /api/produtos retorna a colecao esperada
     request:
-      url: http://127.0.0.1:8000/api/produtos
+      url: http://127.0.0.1:8001/api/produtos
       method: GET
     response:
       status_code: 200
